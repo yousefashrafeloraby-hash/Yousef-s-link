@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Security Alert</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:#050505;
+  color:#ff3030;
+  font-family:Arial,sans-serif;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.box{
+  width:92%;
+  max-width:600px;
+  padding:30px;
+  border:2px solid #ff3030;
+  border-radius:15px;
+  text-align:center;
+  box-shadow:0 0 35px #ff000055;
+}
+
+.alert{
+  font-size:70px;
+  animation:blink .7s infinite;
+}
+
+h1{
+  font-size:32px;
+  margin:15px 0;
+}
+
+p{
+  line-height:1.8;
+  font-size:18px;
+}
+
+.bar{
+  height:20px;
+  background:#222;
+  border-radius:20px;
+  overflow:hidden;
+  margin:25px 0 10px;
+}
+
+.progress{
+  width:0%;
+  height:100%;
+  background:#ff3030;
+  transition:.15s;
+}
+
+.percent{
+  font-size:28px;
+  font-weight:bold;
+}
+
+.status{
+  margin-top:20px;
+  color:#ff7777;
+}
+
+.notice{
+  margin-top:25px;
+  padding:12px;
+  border:1px solid #555;
+  border-radius:10px;
+  color:#aaa;
+  font-size:13px;
+}
+
+@keyframes blink{
+  50%{opacity:.25}
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+  <div class="alert">⚠️</div>
+
+  <h1>تنبيه أمني</h1>
+
+  <p>
+    تم اكتشاف نشاط غير معتاد.
+    <br>
+    جاري إجراء فحص أمني...
+  </p>
+
+  <div class="bar">
+    <div class="progress" id="progress"></div>
+  </div>
+
+  <div class="percent" id="percent">0%</div>
+
+  <div class="status" id="status">
+    جاري فحص الاتصال...
+  </div>
+
+  <div class="notice">
+    This page for hack⚠️
+  </div>
+
+</div>
+
+<script>
+let n = 0;
+
+const progress = document.getElementById("progress");
+const percent = document.getElementById("percent");
+const status = document.getElementById("status");
+
+const messages = [
+  "جاري فحص الاتصال...",
+  "جاري تحليل المتصفح...",
+  "جاري فحص إعدادات الأمان...",
+  "جاري إنهاء الفحص..."
+];
+
+const timer = setInterval(() => {
+
+  n++;
+
+  progress.style.width = n + "%";
+  percent.textContent = n + "%";
+
+  if (n < 25)
+    status.textContent = messages[0];
+
+  else if (n < 50)
+    status.textContent = messages[1];
+
+  else if (n < 75)
+    status.textContent = messages[2];
+
+  else
+    status.textContent = messages[3];
+
+  if (n >= 100) {
+    clearInterval(timer);
+
+    setTimeout(() => {
+      status.textContent =
+        "انتهي التحميل_تم الوصول الي جميع البيانات بشكل تام⚠️";
+    }, 500);
+  }
+
+}, 70);
+</script>
+
+</body>
+</html>
